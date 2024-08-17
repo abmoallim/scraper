@@ -3,9 +3,11 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isSignedIn } = useUser();
 
   const handleLinkClick = () => {
     setMenuOpen(false);
@@ -16,9 +18,9 @@ export default function Header() {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/" legacyBehavior>
-            <span className="text-3xl font-bold text-[#ff8730] ml-2 hidden md:block">
+            <a className="text-3xl font-bold text-[#ff8730] ml-2 hidden md:block">
               Scraper
-            </span>
+            </a>
           </Link>
         </div>
         <div className="hidden md:flex-1 md:flex md:justify-center">
@@ -35,11 +37,23 @@ export default function Header() {
           </nav>
         </div>
         <div className="hidden md:flex items-center">
-          <Link href="/account" legacyBehavior>
-            <a className="text-[#ff8730] border border-[#ff8730] rounded-full px-4 py-1 hover:bg-[#ff8730] hover:text-white">
-              Account
-            </a>
-          </Link>
+          {isSignedIn ? (
+            <UserButton
+              afterSignOutUrl="/"
+              appearance={{
+                elements: {
+                  userButtonTrigger:
+                    "text-[#ff8730] border border-[#ff8730] rounded-full px-4 py-1 hover:bg-[#ff8730] hover:text-white",
+                },
+              }}
+            />
+          ) : (
+            <Link href="https://knowing-troll-86.accounts.dev/sign-in" legacyBehavior>
+              <a className="text-[#ff8730] border border-[#ff8730] rounded-full px-4 py-1 hover:bg-[#ff8730] hover:text-white">
+                Login
+              </a>
+            </Link>
+          )}
         </div>
         <button
           className="md:hidden p-2"
@@ -76,14 +90,26 @@ export default function Header() {
                   Pricing
                 </a>
               </Link>
-              <Link href="/account" legacyBehavior>
-                <a
-                  className="block text-[#ff8730] border border-[#ff8730] rounded-full px-4 py-1 hover:bg-[#ff8730] hover:text-white"
-                  onClick={handleLinkClick}
-                >
-                  Account
-                </a>
-              </Link>
+              {isSignedIn ? (
+                <UserButton
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      userButtonTrigger:
+                        "block text-[#ff8730] border border-[#ff8730] rounded-full px-4 py-1 hover:bg-[#ff8730] hover:text-white",
+                    },
+                  }}
+                />
+              ) : (
+                <Link href="/sign-in" legacyBehavior>
+                  <a
+                    className="block text-[#ff8730] border border-[#ff8730] rounded-full px-4 py-1 hover:bg-[#ff8730] hover:text-white"
+                    onClick={handleLinkClick}
+                  >
+                    Login
+                  </a>
+                </Link>
+              )}
             </nav>
           </div>
         </div>
