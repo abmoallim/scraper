@@ -1,60 +1,28 @@
-"use client"
-import { useState } from 'react';
-import ScrapeTabs from './components/ScrapeTabs';
-import { scrapeWebsite } from './utilities/scrape';
+"use client";
+import { useRouter } from 'next/navigation';
 
-export default function Home() {
-  const [url, setUrl] = useState('');
-  const [scrapedData, setScrapedData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); // New loading state
-
-  const handleScrape = async () => {
-    setError(null);
-    setScrapedData(null);
-    setLoading(true);  // Start loading
-    try {
-      const result = await scrapeWebsite(url);
-      setScrapedData(result.data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);  // Stop loading
-    }
-  };
+export default function LandingPage() {
+  const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-[#f2f2f2]">
-      <h1 className="text-4xl font-bold mb-4 text-gray-800">Scrape a Website</h1>
-      <input
-        type="text"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        placeholder="Enter a URL"
-        className="border rounded p-2 w-full max-w-md mb-4 text-gray-800"
-      />
+    <div className="flex flex-col pt-40 items-center justify-center min-h-screen p-4 bg-gradient-to-b from-white to-[#ffefdc]">
+      <h1 className="text-5xl font-bold mb-6 text-gray-800 text-center">
+        The All-In-One <span className="text-[#ff8730]">Web Scraping</span> Tool.
+      </h1>
+      <p className="text-xl text-gray-600 text-center max-w-2xl">
+        Effortlessly extract data from any website with our powerful and intuitive web scraping platform.
+      </p>
       <button
-        onClick={handleScrape}
-        className="bg-blue-500 text-white p-2 rounded"
+        onClick={() => router.push('/scrape')}
+        className="mt-8 bg-[#ff8730] text-white py-3 px-6 rounded-lg font-semibold shadow-lg hover:bg-[#e56f29] transition duration-200"
       >
-        Scrape
+        Try for free
       </button>
-      {loading && (
-        <div className="mt-4 text-blue-600">
-          <p>Scraping...</p>
-        </div>
-      )}
-      {error && (
-        <div className="mt-4 text-red-500">
-          <p>Error: {error}</p>
-        </div>
-      )}
-      {scrapedData && !loading && (
-        <ScrapeTabs
-          textData={scrapedData.text.replace(/\\n/g, '\n')}
-          jsonData={scrapedData}
-        />
-      )}
+
+      {/* Inserted Image */}
+      <div className="mt-16 w-full max-w-6xl px-4">
+        <img src="/scraper.png" alt="Scraping tool demo" className="rounded-lg shadow-lg w-full" />
+      </div>
     </div>
   );
 }
