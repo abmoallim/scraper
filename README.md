@@ -1,37 +1,42 @@
 ![Scraper](path/to/olo.png)
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Web Scraper Project
+
+This project is a web scraping application built with Next.js that allows users to scrape websites and view the extracted data in real-time.
+
+## Features
+
+- User authentication using Clerk
+- Input field for entering URLs to scrape
+- URL validation to ensure valid input
+- Scraping functionality with loading indicator
+- Display of scraped data in a tabbed interface
+- Error handling for invalid URLs or scraping issues
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Set up Clerk for authentication
+4. Run the development server: `npm run dev`
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Usage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Sign in using Clerk authentication
+2. Enter a valid URL in the input field
+3. Click the "Scrape" button or press Enter to initiate scraping
+4. View the scraped data in the tabbed interface
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Next.js
+- React
+- Clerk for authentication
+- Tailwind CSS for styling
 
-## Learn More
+## Backend API
 
-To learn more about Next.js, take a look at the following resources:
+The backend API for this project can be found at: [https://github.com/abmoallim/scraper_api](https://github.com/abmoallim/scraper_api)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This web scraper project provides a user-friendly interface for extracting data from websites and viewing the results in an organized manner, making it easy for users to gather information from various web sources.
