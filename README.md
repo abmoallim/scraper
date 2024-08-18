@@ -1,6 +1,5 @@
 ![Scraper](/olo.png)
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-# Web Scraper Project
+# Scraper
 
 This project is a web scraping application built with Next.js that allows users to scrape websites and view the extracted data in real-time.
 
