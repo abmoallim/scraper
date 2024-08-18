@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import ScrapeTabs from "../components/ScrapeTabs";
 import { scrapeWebsite } from "../utilities/scrape";
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 
 export default function Scrape() {
   const [url, setUrl] = useState("");
@@ -12,7 +13,9 @@ export default function Scrape() {
   const [loading, setLoading] = useState(false);
   const [isValidUrl, setIsValidUrl] = useState(true);
   const loadingRef = useRef(null);
-
+ 
+  const { user } = useUser();
+  
   const handleScrape = async (link) => {
     if (!isValidUrl) {
       setError("Invalid URL. Please enter a valid URL.");
@@ -22,7 +25,7 @@ export default function Scrape() {
     setError(null);
     setLoading(true);
     try {
-      const result = await scrapeWebsite(link || url);
+      const result = await scrapeWebsite(link || url, user?.id);
       setScrapedData((prevData) => [...prevData, result.data]);
     } catch (err) {
       setError(err.message);
